@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
+    <title>My Pomodoro</title>
+</head>
+<body>
+    <div class="my-app bff">
+        <h1 class="title">My Pomodoro</h1>
+        <div class="glass">
+            <span class="time" id="time"></span>
+                
+            <section class="controller">
+                <button id="start" onclick="startTime()" class="btn start">Cronometro</button>
+                <button id="break" onclick="breakTime()" class="btn break">Break</button>
+                <button id="stop" onclick="stopTime()" class="btn stop">Stop</button>
+            </section>
+
+
+            <!-- temporizador -->
+            <section class="controller temporizador">
+                <button id="start" onclick="descendingTime()" class="btn start">Temporizador</button>
+                <input type="number" name="" id="temporizador">
+            </section>
+            <section class="tasks">
+                <label class="subTitle" for="task">Task</label>
+                <input type="text" id="task" class="inp" maxlength="28" minlength="3" >
+                <ul id="listenTask" class="listen"></ul>
+            </section>
+        </div>
+        <footer>&copy; by Sidney Lima</footer>
+    </div>
+
+</body>
+</html>
