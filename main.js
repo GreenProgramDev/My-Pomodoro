@@ -1,45 +1,52 @@
-const timerDisplay = document.getElementById('time')
-let interval;
-let seconds = -1;
-let isBreakTime = false;
+const display = document.getElementById("time");
+const timeTemp = document.getElementById('temporizador')
 
-const startTime =  () => {
-    if(!interval){
-        interval = setInterval(updateTime, 1000)
-        
+let intervalId;
+let isRunning = false
+let seconds = -1
+let minutes = 0
+
+const updateTime = () => {
+  seconds++;
+
+  if (seconds >= 60) {
+    seconds = 0;
+    minutes++;
+  }
+
+  display.textContent =
+    (minutes < 10 ? "0" : '') + minutes + ":" + (seconds < 10 ? "0" : '') + seconds;
+};
+
+const startTime = () => {
+    if(!isRunning){
+        intervalId = setInterval(updateTime, 1000)
+        isRunning = true
     }
+
 }
 
 const breakTime = () => {
-    isBreakTime = !isBreakTime
-}
-
-const stopTime = () => {
-    clearInterval(interval)
-    timerDisplay.textContent = '00:00'
-
-}
-
-const updateTime = () => {
-    if(!isBreakTime){
-        seconds++;
+    if(isRunning){
+        clearInterval(intervalId)
+        isRunning = false
     }
+}
 
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;    
-    timerDisplay.textContent = `${minutes.toString().padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`; 
-};
+const resetTime = () => {
+    clearInterval(intervalId)
+    seconds = 0
+    minutes = 0
+    display.textContent = ''
+    isRunning = false
+}
 
-
-// const descendingTime = () => {
-//     const timerInput = document.getElementById('time');
-
-//     timerDisplay.textContent = 
-
-//     seconds--
-//     const inputMinutes = document.getElementById();
-//     const minutes = Math.floor(seconds / 60);
-//     const remainingSeconds = seconds % 60;    
-//     timerDisplay.textContent = `${minutes.toString().padStart(2, 0)}:${remainingSeconds.toString().padStart(2, "0")}`
-
-// };
+const temp = () => {
+    if(timeTemp.value){
+        minutes = timeTemp.value
+        seconds--
+        display.textContent = 
+        (minutes < 10 ? "0" : '') + minutes + ":" + (seconds < 10 ? "0" : '') + seconds;
+        timeTemp.value = ''
+    }
+}
