@@ -41,12 +41,28 @@ const resetTime = () => {
     isRunning = false
 }
 
+const downgradeTime = () => {
+    seconds--;
+  
+    if (seconds <= 0) {
+      seconds = 60;
+      minutes--;
+    }
+  
+    display.textContent =
+      (minutes < 10 ? "0" : '') + minutes + ":" + (seconds < 10 ? "0" : '') + seconds;
+  };
+
 const temp = () => {
     if(timeTemp.value){
         minutes = timeTemp.value
-        seconds--
+        seconds = 0
+        isRunning = true
         display.textContent = 
         (minutes < 10 ? "0" : '') + minutes + ":" + (seconds < 10 ? "0" : '') + seconds;
         timeTemp.value = ''
+        intervalId = setInterval(downgradeTime, 1000)
+        isRunning = true
     }
+    
 }
