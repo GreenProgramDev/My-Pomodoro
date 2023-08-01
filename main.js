@@ -1,5 +1,9 @@
-const display = document.getElementById("time");
-const timeTemp = document.getElementById("temporizador");
+const displayT = document.getElementById("displayTime");
+const displayS = document.getElementById("displayStopwatch");
+
+const stopWatchTemp = document.getElementById("stopWatch");
+const timeTemp = document.getElementById("timer");
+
 const btnStart = document.getElementById("start");
 const btnBreak = document.getElementById("break");
 
@@ -7,7 +11,15 @@ let intervalId;
 let isRunning = false;
 let seconds = 0;
 let minutes = 0;
+let secondsTime = 0;
+let minutesTime = 0;
 let limitMinutes = 60;
+
+// timeTemp = () => {
+//   if(timeTemp >= 60){
+//     timeTemp = 60
+//   }
+// }
 
 const updateTime = () => {
   seconds++;
@@ -21,7 +33,7 @@ const updateTime = () => {
     isRunning = false;
   }
 
-  display.textContent =
+  displayS.textContent =
     (minutes < 10 ? "0" : "") +
     minutes +
     ":" +
@@ -30,33 +42,34 @@ const updateTime = () => {
 };
 
 const downgradeTime = () => {
-  seconds--;
+  secondsTime--;
 
-  if (seconds <= 0) {
-    seconds = 59;
-    minutes--;
+  if (secondsTime <= 0) {
+    secondsTime = 59;
+    minutesTime--;
   }
 
-  if (minutes < 0) {
+  if (minutesTime < 0) {
     clearInterval(intervalId);
     isRunning = false;
-    seconds = 0;
-    minutes = 0;
+    secondsTime = 0;
+    minutesTime = 0;
   }
 
-  display.textContent =
-    (minutes < 10 ? "0" : "") +
-    minutes +
+  displayT.textContent =
+    (minutesTime < 10 ? "0" : "") +
+    minutesTime +
     ":" +
-    (seconds < 10 ? "0" : "") +
-    seconds;
+    (secondsTime < 10 ? "0" : "") +
+    secondsTime;
 };
 
 const startTime = () => {
-  if (timeTemp.value) {
-    limitMinutes = timeTemp.value;
-    timeTemp.value = "";
-
+  if (stopWatchTemp.value) {
+    limitMinutes = stopWatchTemp.value;
+    stopWatchTemp.value = "";
+    minutes = 0
+    seconds = 0;
   }
   if (downgradeTime) {
     clearInterval(intervalId);
@@ -65,28 +78,27 @@ const startTime = () => {
   if (!isRunning) {
     intervalId = setInterval(updateTime, 1000);
     isRunning = true;
-  }
+  };
 };
 
-const temp = () => {
+const timerTemp = () => {
   breakTime();
   intervalId = setInterval(downgradeTime, 1000);
 
   if (timeTemp.value) {
     breakTime()
     intervalId = setInterval(downgradeTime, 1000);
-    minutes = timeTemp.value;
-    seconds = 0;
-    isRunning = true;
-    display.textContent =
-      (minutes < 10 ? "0" : "") +
-      minutes +
-      ":" +
-      (seconds < 10 ? "0" : "") +
-      seconds;
+    minutesTime = timeTemp.value;
     timeTemp.value = "";
-    // isRunning = true;
-  }
+    secondsTime = 0;
+    isRunning = true;
+    displayT.textContent =
+      (minutesTime < 10 ? "0" : "") +
+      minutesTime +
+      ":" +
+      (secondsTime < 10 ? "0" : "") +
+      secondsTime;
+  };
 };
 
 const breakTime = () => {
@@ -107,9 +119,18 @@ const resetTime = () => {
   if (startTime) {
     isRunning = false;
   }
-  display.textContent = "";
+  displayS.textContent = "";
+  displayT.textContent = "";
+
   if (downgradeTime) {
     clearInterval(intervalId);
     isRunning = false;
   }
 };
+
+// const showOverlay = () => {
+//   if(limitMinutes == true){
+//    alert('helo')
+//   }
+// }
+
