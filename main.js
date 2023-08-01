@@ -33,7 +33,7 @@ const downgradeTime = () => {
   seconds--;
 
   if (seconds <= 0) {
-    seconds = 60;
+    seconds = 59;
     minutes--;
   }
 
@@ -53,6 +53,11 @@ const downgradeTime = () => {
 };
 
 const startTime = () => {
+  if (timeTemp.value) {
+    limitMinutes = timeTemp.value;
+    timeTemp.value = "";
+
+  }
   if (downgradeTime) {
     clearInterval(intervalId);
     isRunning = false;
@@ -60,9 +65,6 @@ const startTime = () => {
   if (!isRunning) {
     intervalId = setInterval(updateTime, 1000);
     isRunning = true;
-  }
-  if (timeTemp.value) {
-    limitMinutes = timeTemp.value;
   }
 };
 

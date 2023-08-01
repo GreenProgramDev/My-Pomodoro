@@ -1,39 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <script src="main.js" defer></script>
     <title>My Pomodoro</title>
-</head>
-<body>
-    <div class="my-app bff">
-        <h1 class="title">My Pomodoro</h1>
-        <div class="glass">
-            <p class="time" id="time"></p>
-                
-            <section class="controller">
-                <button id="start" onclick="startTime()" class="btn start">Start</button>
-                <button id="break" onclick="breakTime()" class="btn break">Break</button>
-                <button id="start" onclick="temp()" class="btn start">Stopwatch</button>
-            </section>
-
-
-            <!-- temporizador -->
-            <section class="controller temporizador">
-                <button id="stop" onclick="resetTime()" class="btn stop">Reset</button>
-
-                <input type="number" id="temporizador">
-            </section>
-            <section class="tasks">
-                <label class="subTitle" for="task">Task</label>
-                <input type="text" id="task" class="inp" maxlength="28" minlength="3" >
-                <ul id="listenTask" class="listen"></ul>
-            </section>
+  </head>
+  <body>
+    <!-- <div id="circularProgressBar" class="progress-bar">
+        <div class="progress-bar-inner">
+            <h2 class="progress-value">25:00</h2>
         </div>
-        <footer>&copy; by Sidney Lima</footer>
+    </div> -->
+    <div class="my-app bff">
+      <h1 class="title">My Po To Do</h1>
+      <div class="glass">
+        <p class="time" id="time"></p>
+        <section class="controller">
+          <input type="number" id="temporizador" maxlength="2"/>
+          <button id="start" onclick="startTime()" class="btn start">
+            Stopwatch
+          </button>
+          <button id="start" onclick="temp()" class="btn start">
+            Timer
+          </button>
+          <button id="break" onclick="breakTime()" class="btn break">
+            Break
+          </button>
+          <button id="stop" onclick="resetTime()" class="btn stop">
+            Reset
+          </button>
+        </section>
+        <section class="tasks">
+          <label class="subTitle" for="task">Task</label>
+          <input
+            type="text"
+            id="task"
+            class="inp"
+            maxlength="28"
+            minlength="3"
+          />
+          <ul id="listenTask" class="listen"></ul>
+        </section>
+      </div>
+      <footer>&copy; by Sidney Lima</footer>
     </div>
-
-</body>
+  </body>
 </html>
