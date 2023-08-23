@@ -11,15 +11,11 @@ let intervalId;
 let isRunning = false;
 let seconds = 0;
 let minutes = 0;
+
 let secondsTime = 0;
 let minutesTime = 0;
-let limitMinutes = 60;
 
-// timeTemp = () => {
-//   if(timeTemp >= 60){
-//     timeTemp = 60
-//   }
-// }
+let limitMinutes = 60;
 
 const updateTime = () => {
   seconds++;
@@ -43,7 +39,7 @@ const updateTime = () => {
 
 const downgradeTime = () => {
   secondsTime--;
-
+  
   if (secondsTime <= 0) {
     secondsTime = 59;
     minutesTime--;
@@ -62,6 +58,7 @@ const downgradeTime = () => {
     ":" +
     (secondsTime < 10 ? "0" : "") +
     secondsTime;
+
 };
 
 const startTime = () => {
@@ -99,6 +96,14 @@ const timerTemp = () => {
       (secondsTime < 10 ? "0" : "") +
       secondsTime;
   };
+
+  if(timeTemp > 10){
+    secondsTime = timeTemp.value;
+  }
+  
+  if(timeTemp === 0){
+    alert("Fim")
+  }
 };
 
 const breakTime = () => {
