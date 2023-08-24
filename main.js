@@ -35,11 +35,15 @@ const updateTime = () => {
     ":" +
     (seconds < 10 ? "0" : "") +
     seconds;
+
+    if (minutes == limitMinutes) {
+      alert("Uma pausa e retorne em seguida!")
+    }
 };
 
 const downgradeTime = () => {
   secondsTime--;
-  
+
   if (secondsTime <= 0) {
     secondsTime = 59;
     minutesTime--;
@@ -59,13 +63,16 @@ const downgradeTime = () => {
     (secondsTime < 10 ? "0" : "") +
     secondsTime;
 
+    if (minutesTime == 0 && secondsTime == 0) {
+      alert("Volte ao que estava fazendo")
+    }
 };
 
 const startTime = () => {
   if (stopWatchTemp.value) {
     limitMinutes = stopWatchTemp.value;
     stopWatchTemp.value = "";
-    minutes = 0
+    minutes = 0;
     seconds = 0;
   }
   if (downgradeTime) {
@@ -75,7 +82,7 @@ const startTime = () => {
   if (!isRunning) {
     intervalId = setInterval(updateTime, 1000);
     isRunning = true;
-  };
+  }
 };
 
 const timerTemp = () => {
@@ -83,7 +90,7 @@ const timerTemp = () => {
   intervalId = setInterval(downgradeTime, 1000);
 
   if (timeTemp.value) {
-    breakTime()
+    breakTime();
     intervalId = setInterval(downgradeTime, 1000);
     minutesTime = timeTemp.value;
     timeTemp.value = "";
@@ -95,15 +102,13 @@ const timerTemp = () => {
       ":" +
       (secondsTime < 10 ? "0" : "") +
       secondsTime;
-  };
+  }
 
-  if(timeTemp > 10){
+  if (timeTemp > 10) {
     secondsTime = timeTemp.value;
   }
+
   
-  if(timeTemp === 0){
-    alert("Fim")
-  }
 };
 
 const breakTime = () => {
@@ -138,4 +143,3 @@ const resetTime = () => {
 //    alert('helo')
 //   }
 // }
-
