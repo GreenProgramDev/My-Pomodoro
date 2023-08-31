@@ -93,7 +93,12 @@ const startTime = () => {
     isRunning = true;
   }
   
-  historicStart.push(limitMinutes)
+  if(limitMinutes < 10){
+    historicStart.push("0" + limitMinutes + ":00")
+  }
+  if(limitMinutes > 9){
+    historicStart.push(limitMinutes + ":00")
+  }
   updateHistoricStart()
 };
 
@@ -122,7 +127,7 @@ const timerTemp = () => {
     secondsTime = timeTemp.value;
   }
 
-  historicTime.push(minutesTime)
+  historicTime.push(displayT.textContent)
   updateHistoricTime()
 };
 
