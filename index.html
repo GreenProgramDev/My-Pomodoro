@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
     <script src="main.js" defer></script>
     <title>My Pomodoro</title>
   </head>
@@ -17,32 +20,27 @@
     <div class="my-app bff">
       <h1 class="title">My Po To Do</h1>
       <div class="glass">
-
         <section class="timer-stopwatch">
           <p class="time" id="displayStopwatch"></p>
 
-          <p class="time" id="displayTime"></p>          
+          <p class="time" id="displayTime"></p>
         </section>
 
         <section class="controller">
-          <input type="number" id="stopWatch" class="inputStopWatch"/>
-          <button onclick="startTime()" class="btn start">
-            Stopwatch
-          </button>
+          <input type="number" id="stopWatch" class="inputStopWatch" />
+          <button onclick="startTime()" class="btn start">Stopwatch</button>
 
           <button id="break" onclick="breakTime()" class="btn break">
             Break
           </button>
-          <input type="number" id="timer" class="inputTimer"/>
-          <button onclick="timerTemp()" class="btn start">
-            Timer
-          </button>
+          <input type="number" id="timer" class="inputTimer" />
+          <button onclick="timerTemp()" class="btn start">Timer</button>
 
           <button id="stop" onclick="resetTime()" class="btn stop">
             Reset
           </button>
         </section>
-        <section class="tasks">
+        <!-- <section class="tasks">
           <label class="subTitle" for="task">Task</label>
           <input
             type="text"
@@ -52,6 +50,15 @@
             minlength="3"
           />
           <ul id="listenTask" class="listen"></ul>
+        </section> -->
+        <section class="listHistoric">
+          <label class="subTitle">Stopwatch</label>
+          <ul id="historicStart" class="listen"></ul>
+        </section>
+        <br />
+        <section class="historicTime">
+          <label class="subTitle">Time</label>
+          <ul id="historicTime" class="listen"></ul>
         </section>
       </div>
       <footer>&copy; by Sidney Lima</footer>
