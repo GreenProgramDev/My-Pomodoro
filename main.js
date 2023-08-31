@@ -7,6 +7,13 @@ const timeTemp = document.getElementById("timer");
 const btnStart = document.getElementById("start");
 const btnBreak = document.getElementById("break");
 
+const listHistoricStar = document.getElementById('historicStart')
+const historicStart = []
+const listHistoricTime = document.getElementById('historicTime')
+const historicTime = []
+
+
+
 let intervalId;
 let isRunning = false;
 let seconds = 0;
@@ -19,7 +26,7 @@ let limitMinutes = 60;
 
 const updateTime = () => {
   seconds++;
-
+  
   if (seconds >= 60) {
     seconds = 0;
     minutes++;
@@ -28,21 +35,21 @@ const updateTime = () => {
     clearInterval(intervalId);
     isRunning = false;
   }
-
+  
   displayS.textContent =
-    (minutes < 10 ? "0" : "") +
-    minutes +
+  (minutes < 10 ? "0" : "") +
+  minutes +
     ":" +
     (seconds < 10 ? "0" : "") +
     seconds;
-
+    
     if (minutes == limitMinutes) {
       alert("Uma pausa e retorne em seguida!")
     }
-};
-
-const downgradeTime = () => {
-  secondsTime--;
+  };
+  
+  const downgradeTime = () => {
+    secondsTime--;
 
   if (secondsTime <= 0) {
     secondsTime = 59;
@@ -73,17 +80,24 @@ const startTime = () => {
     limitMinutes = stopWatchTemp.value;
     stopWatchTemp.value = "";
     minutes = 0;
-    seconds = 0;
+    seconds = 0; 
   }
+
   if (downgradeTime) {
     clearInterval(intervalId);
     isRunning = false;
   }
+
   if (!isRunning) {
     intervalId = setInterval(updateTime, 1000);
     isRunning = true;
   }
+  
+  historicStart.push(limitMinutes)
+  updateHistoricStart()
 };
+
+
 
 const timerTemp = () => {
   breakTime();
@@ -108,7 +122,8 @@ const timerTemp = () => {
     secondsTime = timeTemp.value;
   }
 
-  
+  historicTime.push(minutesTime)
+  updateHistoricTime()
 };
 
 const breakTime = () => {
@@ -138,8 +153,24 @@ const resetTime = () => {
   }
 };
 
-// const showOverlay = () => {
-//   if(limitMinutes == true){
-//    alert('helo')
-//   }
-// }
+const updateHistoricStart = () => {
+  listHistoricStar.innerHTML = "";
+
+  historicStart.forEach(entry => {
+    const newStart = document.createElement('li')
+    newStart.textContent = entry;
+    newStart.classList.add('itemLi')
+    listHistoricStar.appendChild(newStart)
+  })
+}
+
+const updateHistoricTime = () => {
+  listHistoricTime.innerHTML = "";
+
+  historicTime.forEach(entry => {
+    const newTime = document.createElement('li')
+    newTime.textContent = entry;
+    newTime.classList.add('itemLi')
+    listHistoricTime.appendChild(newTime)
+  })
+}
