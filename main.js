@@ -28,7 +28,7 @@ const updateTime = () => {
   seconds++;
   
   if (seconds >= 60) {
-    seconds = 0;
+    seconds = 0 ;
     minutes++;
   }
   if (minutes >= limitMinutes) {
@@ -78,26 +78,26 @@ const updateTime = () => {
 const startTime = () => {
   if (stopWatchTemp.value) {
     limitMinutes = stopWatchTemp.value;
-    stopWatchTemp.value = "";
     minutes = 0;
     seconds = 0; 
   }
-
   if (downgradeTime) {
     clearInterval(intervalId);
     isRunning = false;
-  }
-
+  } 
   if (!isRunning) {
     intervalId = setInterval(updateTime, 1000);
     isRunning = true;
   }
-  
-  if(limitMinutes < 10){
-    historicStart.push("0" + limitMinutes + ":00")
-  }
-  if(limitMinutes > 9){
-    historicStart.push(limitMinutes + ":00")
+  if(stopWatchTemp.value > 0){
+    if(limitMinutes < 10){
+      historicStart.push("0" + limitMinutes + ":00")
+    }else {
+        historicStart.push(limitMinutes + ":00")
+    }
+    stopWatchTemp.value = ""
+  }else {
+    historicStart.push(displayS.textContent)
   }
   updateHistoricStart()
 };
