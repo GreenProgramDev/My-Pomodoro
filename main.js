@@ -94,12 +94,14 @@ const startTime = () => {
       historicStart.push("0" + limitMinutes + ":00")
     }else {
         historicStart.push(limitMinutes + ":00")
-    }
+      }
     stopWatchTemp.value = ""
+    updateHistoricStart()
   }else {
     historicStart.push(displayS.textContent)
   }
-  updateHistoricStart()
+
+  // if()
 };
 
 
@@ -162,11 +164,15 @@ const updateHistoricStart = () => {
   listHistoricStar.innerHTML = "";
 
   historicStart.forEach(entry => {
-    const newStart = document.createElement('li')
-    newStart.textContent = entry;
-    newStart.classList.add('itemLi')
+    const newStart = document.createElement('ul')
+    // newStart.classList.add('itemUl')
+    const newItemStart = document.createElement('li')
+    newItemStart.classList.add('itemLi')
+    newItemStart.textContent = entry;
+    newStart.appendChild(newItemStart)
     listHistoricStar.appendChild(newStart)
   })
+
 }
 
 const updateHistoricTime = () => {
