@@ -6,6 +6,10 @@ const timeTemp = document.getElementById("timer");
 
 const btnStart = document.getElementById("start");
 const btnBreak = document.getElementById("break");
+const btnStop = document.getElementById('stop')
+btnStop.style.display = 'none'
+const btnReturn = document.getElementById("return")
+btnReturn.style.display = 'none'
 
 const listHistoricStar = document.getElementById('historicStart')
 const historicStart = []
@@ -81,6 +85,16 @@ const startTime = () => {
     minutes = 0;
     seconds = 0; 
   }
+  if(stopWatchTemp.value > 0){
+    if(limitMinutes < 10){
+      historicStart.push("0" + limitMinutes + ":00")
+    }else {
+      historicStart.push(limitMinutes + ":00")
+    }
+    stopWatchTemp.value = ""
+  }else {
+    historicStart.push(displayS.textContent)
+  }
   if (downgradeTime) {
     clearInterval(intervalId);
     isRunning = false;
@@ -89,22 +103,11 @@ const startTime = () => {
     intervalId = setInterval(updateTime, 1000);
     isRunning = true;
   }
-  if(stopWatchTemp.value > 0){
-    if(limitMinutes < 10){
-      historicStart.push("0" + limitMinutes + ":00")
-    }else {
-        historicStart.push(limitMinutes + ":00")
-      }
-    stopWatchTemp.value = ""
-    updateHistoricStart()
-  }else {
-    historicStart.push(displayS.textContent)
-  }
+  updateHistoricStart()
+  btnStop.style.display = 'block'
 
-  // if()
+  btnStart.style.display = 'none'
 };
-
-
 
 const timerTemp = () => {
   breakTime();
@@ -142,7 +145,25 @@ const breakTime = () => {
     clearInterval(intervalId);
     isRunning = false;
   }
+  if(btnReturn.style.display === 'none'){
+    btnBreak.style.display = 'none';
+    btnReturn.style.display = 'block';
+  }
+  
 };
+
+const breakReturn = () => {
+  
+  if(btnBreak.style.display === 'none'){
+    btnBreak.style.display = 'block';
+    btnReturn.style.display = 'none';
+  }
+  
+  if (!isRunning) {
+    intervalId = setInterval(updateTime, 1000);
+    isRunning = true;
+  }
+}
 
 const resetTime = () => {
   clearInterval(intervalId);
@@ -158,6 +179,14 @@ const resetTime = () => {
     clearInterval(intervalId);
     isRunning = false;
   }
+  if(btnBreak.style.display === 'none'){
+    btnBreak.style.display = 'block';
+    btnReturn.style.display = 'none';
+  }
+  btnStop.style.display = 'none'
+  btnStart.style.display = 'block'
+
+
 };
 
 const updateHistoricStart = () => {
@@ -165,7 +194,7 @@ const updateHistoricStart = () => {
 
   historicStart.forEach(entry => {
     const newStart = document.createElement('ul')
-    // newStart.classList.add('itemUl')
+    newStart.classList.add('itemUl')
     const newItemStart = document.createElement('li')
     newItemStart.classList.add('itemLi')
     newItemStart.textContent = entry;

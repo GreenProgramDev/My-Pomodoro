@@ -28,14 +28,17 @@
 
         <section class="controller">
           <input type="number" id="stopWatch" class="inputStopWatch" />
-          <button onclick="startTime()" class="btn start">Stopwatch</button>
+          <button id="start" onclick="startTime()" class="btn start">Stopwatch</button>
 
           <button id="break" onclick="breakTime()" class="btn break">
             Break
           </button>
+          <button id="return" onclick="breakReturn()" class="btn breakReturn">
+            Return
+          </button>
           <input type="number" id="timer" class="inputTimer" />
           <button onclick="timerTemp()" class="btn start">Timer</button>
-
+          
           <button id="stop" onclick="resetTime()" class="btn stop">
             Reset
           </button>
